@@ -1,0 +1,20 @@
+{
+  "name": "bengiblog-node",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "marked": "^0.3.6",
+    "moment": "^2.19.0",
+    "morgan": "~1.9.0",
+    "mysql": "^2.14.1",
+    "serve-favicon": "~2.4.5"
+  }
+}

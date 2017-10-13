@@ -4,7 +4,6 @@
 /node_modules
 /.idea
 # production
-/dist
 /model/db.js
 # misc
 .DS_Store

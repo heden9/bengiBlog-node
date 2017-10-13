@@ -5,7 +5,7 @@
 /.idea
 # production
 /dist
-
+/model/db.js
 # misc
 .DS_Store
 npm-debug.log*

@@ -111,7 +111,7 @@ moment.locale('zh-cn', {
     }
 });
 exports.getAll=function(callback){
-    var sql='SELECT article.a_id id, a_title title, a_sub_title subTitle, a_content content, a_time `time`, t_title label, tag.t_id FROM article, tag, t_a WHERE article.a_id = t_a.a_id AND tag.t_id = t_a.t_id';
+    var sql = 'SELECT article.a_id id, a_title title, a_sub_title subTitle, a_content content, a_time `time`, t_title label, tag.t_id FROM article, tag, t_a WHERE article.a_id = t_a.a_id AND tag.t_id = t_a.t_id ORDER BY a_time';
     db.query(sql,[],function (rs) {
         var tmp1 = {};
         var arr1 = [];

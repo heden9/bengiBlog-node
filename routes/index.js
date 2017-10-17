@@ -6,13 +6,31 @@ var marked = require('marked');
 /* GET home page. */
 router.post('/article', function(req, res, next) {
     var id = req.body.id;
-    fs.readFile('./MD/'+ id + '.md', function(err, data) {
-        var html = marked(data.toString());
-        res.send({
-            version: new Date().getTime(),
-            mdContent: html
+    blogModel.queryArticle(id, function (rs) {
+        if (!rs) {
+            res.send({
+                err: '该文章不存在'
+            });
+            return;
+        }
+        fs.readFile('./MD/' + id + '.md', function (err, data) {
+            if (err) {
+                res.send({
+                    err: '404 notfound'
+                });
+                return;
+            }
+            var html = marked(data.toString());
+            res.send({
+                version: new Date().getTime(),
+                mdContent: html,
+                subTitle: rs.subTitle,
+                time: rs.time,
+                title: rs.title
+            });
         });
     });
+
 });
 router.get('/home', function(req, res, next) {
     blogModel.getAll(function(rs){

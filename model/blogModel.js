@@ -162,9 +162,9 @@ exports.getAll=function(callback){
 };
 
 
-// exports.queryArticle = function (id, callback) {
-//     var sql = 'SELECT a_title title, a_sub_title subTitle, a_time `time` FROM article WHERE a_id = ?';
-//     db.query(sql, [id], function (rs) {
-//
-//     });
-// }
+exports.queryArticle = function (id, callback) {
+    var sql = 'SELECT a_title title, a_sub_title subTitle, a_time `time` FROM article WHERE a_id = ?';
+    db.query(sql, [id], function (rs) {
+        callback && callback(rs[0]);
+    });
+}

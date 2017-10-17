@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var blogModel = require('../model/blogModel');
 var fs = require('fs');
+var moment = require('moment');
 var marked = require('marked');
 /* GET home page. */
 router.post('/article', function(req, res, next) {
@@ -22,10 +23,10 @@ router.post('/article', function(req, res, next) {
             }
             var html = marked(data.toString());
             res.send({
-                version: new Date().getTime(),
+                version: rs.time,
                 mdContent: html,
                 subTitle: rs.subTitle,
-                time: rs.time,
+                time: moment(rs.time).format('MMMM Do YYYY, h:mm:ss a'),
                 title: rs.title
             });
         });

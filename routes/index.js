@@ -14,7 +14,7 @@ router.post('/article', function(req, res, next) {
             });
             return;
         }
-        fs.readFile('./MD/' + id + '.md', function (err, data) {
+        fs.readFile('./MD/' + rs.title + '.md', function (err, data) {
             if (err) {
                 res.send({
                     err: '404 notfound'

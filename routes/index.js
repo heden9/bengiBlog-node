@@ -22,8 +22,10 @@ router.post('/article', function(req, res, next) {
                 return;
             }
             var html = marked(data.toString());
+            var stat = fs.statSync('./MD/' + rs.title + '.md');
+            var mtime = stat.mtime;
             res.send({
-                version: rs.time,
+                version: mtime,
                 mdContent: html,
                 subTitle: rs.subTitle,
                 time: moment(rs.time).format('MMMM Do YYYY, h:mm:ss a'),

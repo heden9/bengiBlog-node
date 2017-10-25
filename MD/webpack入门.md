@@ -1,10 +1,11 @@
 # webpack入门
 >   前端自动构建工具 模块打包机
 
+[![webpack](https://img.shields.io/badge/webpack-^3.8.1-brightgreen.svg?style=flat-square)](https://github.com/webpack/webpack)
 生产模式
 开发模式
 对资源依赖进行预处理，集成，压缩
-
+![webpack](https://webpack.js.org/bf093af83ee5548ff10fef24927b7cd2.svg)
 分析项目结构，找到js模块以及其他的一些浏览器不能直接运行的拓展语言（less、Typescript）,并将其转换和打包围合适的格式供浏览器使用。
 
 ### 一、安装webpack
@@ -45,8 +46,10 @@
         }
     }
 ```
+`__dirname`是node中的一个全局变量，指向当前脚本指向目录  
+`entry`和`output`是必选项，现在我们执行`npm run build`，项目正常打包，输出到`dist`目录
 
-`entry`和`output`是必选项，现在我们执行`npm run build`
+>   不能直接执行`webpack`命令，因为我们的webpack不是全局安装的，只能够在`node_modules`中进行访问，所以要在`package.json`中进行配置
 
 #### 4.配置webpack-dev-server
 ##### 1.安装
@@ -96,9 +99,22 @@
             },
         ]
     }
+    ...
+    ...
+    plugin: [
+        new ExtractTextPlugin('css/styles.css'), // 输出的路径
+    ]
 ```
 将css单独打包
+-   下载 `extract-text-webpack-plugin`插件
 ```javascript
+    yarn add extract-text-webpack-plugin --dev
+```
+-   配置
+```javascript
+    const ExtractTextPlugin = require('extract-text-webpack-plugin');
+    ...
+    ...
     use: ExtractTextPlugin.extract({  // 将css单独打包的插件
         fallback: 'style-loader',
         use: 'css-loader'
@@ -109,3 +125,17 @@
     yarn add file-loader url-loader --dev
 ```
 `url-loader`依赖于`file-loader`,必须要同时安装
+```javascript
+    {
+        test: /\.(png|jpg|gif)$/i, // i 表示无视大小写
+        use: [{
+            loader: 'url-loader',
+            options: {
+                limit: 500, // 大小限制， 小于该大小的图片会被打包成base64
+                outputPath: 'images/' // 文件输出的路径
+            }
+        }]
+    }
+```
+
+完整代码可见[https://github.com/w771854332/webpack-demo](https://github.com/w771854332/webpack-demo)

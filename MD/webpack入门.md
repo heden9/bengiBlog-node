@@ -2,11 +2,12 @@
 >   前端自动构建工具 模块打包机
 
 [![webpack](https://img.shields.io/badge/webpack-^3.8.1-brightgreen.svg?style=flat-square)](https://github.com/webpack/webpack)
-生产模式
-开发模式
-对资源依赖进行预处理，集成，压缩
+## 什么是webpack？
+>   对资源依赖进行预处理，集成，压缩
+
+WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。
+
 ![webpack](https://webpack.js.org/bf093af83ee5548ff10fef24927b7cd2.svg)
-分析项目结构，找到js模块以及其他的一些浏览器不能直接运行的拓展语言（less、Typescript）,并将其转换和打包围合适的格式供浏览器使用。
 
 ### 一、安装webpack
 #### 1.先检查是否有node环境

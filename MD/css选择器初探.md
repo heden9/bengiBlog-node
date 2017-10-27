@@ -70,7 +70,7 @@
     }
 ```
 ### 伪元素选择器
-```css
+```cssv
     .div1::after {
         content: '';
     }

@@ -12,7 +12,7 @@
 ![float](http://upload-images.jianshu.io/upload_images/1158202-27ac63a8ae142d04.png?imageMogr2/auto-orient/strip%7CimageView2/2)
 
 但是人们很快发现了他的好处，可以设置宽高，并且一个挨着一个像内联元素一样排列。早期的浏览器是不支持`inline-block`的，于是`float`就成了大家所热爱的神器。相比`inline-block`,他真的很特别。
-
+![float](http://upload-images.jianshu.io/upload_images/1158202-6d074de3fdb03dc1.png?imageMogr2/auto-orient/strip%7CimageView2/2)
 #### 浮动的特征
 
 ### 1.display:block;clear:both;

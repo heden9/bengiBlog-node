@@ -138,5 +138,95 @@ WebPack可以看做是模块打包机：它做的事情是，分析你的项目�
         }]
     }
 ```
+#### 6.如何打包sass
+安装
+```javascript
+    yarn add node-sass sass-loader --dev
+```
+配置
+```javascript
+    {
+        use: [{
+            loader: 'style-loader'
+        },{
+            loader: 'css-loader'
+        },{
+            loader: 'sass-loader'
+        }],
+        // 或 分离打包
+        use: ExtractTextPlugin.extract({
+            use: [{
+                loader: 'css-loader'
+            },{
+                loader: 'sass-loader'
+            }],
+            fallback: 'style-loader'
+        })
+    }
+```
+#### 7.postcss自动添加css前缀
+安装
+```javascript
+    yarn add postcss-loader autoprefixer --dev
+    // 新建
+    touch postcss.config.js
+```
+```javascript
+    // postcss.config.js
+    module.exports = {
+        plugins: [
+            require('autoprefixer')
+        ]
+    }
+```
+配置
+```javascript
+    // 修改css的配置
+    use: ExtractTextPlugin.extract({  // 将css单独打包的插件
+        fallback: 'style-loader',
+        use: [{
+            loader: 'css-loader',
+            options: { importLoader: 1}
+        }, 'postcss-loader']
+    })
+```
 
+#### 8.清除未使用的css
+安装
+```javascript
+    yarn add purifycss-webpack purify-css --dev  
+```
+配置
+```javascript
+    const glob = require('glob');
+    const PurifyCSSPlugin = require('purifycss-webpack');
+
+    ...
+    plugins: [
+        ...
+        new PurifyCSSPlugin({
+            paths: glob.sync(path.join(__dirname, 'src/*.html')),
+        })
+    ]
+```
+
+#### 9.配置babel-loader
+推荐使用`babel-preset-env`来转换es6语法
+```javascript
+    yarn add babel-core babel-loader babel-preset-env --dev
+```
+配置
+```javascript
+    {
+        test: /\.(jsx|js)$/,
+        use: {
+            loader: 'babel-loader',
+            options: {
+                presets: [
+                    "env"
+                ]
+            }
+        }
+    }
+```
 完整代码可见[https://github.com/w771854332/webpack-demo](https://github.com/w771854332/webpack-demo)

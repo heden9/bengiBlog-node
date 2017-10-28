@@ -48,13 +48,16 @@ css的布局模型可以看做是在y轴上分布，划分为三层，我们常
     <span>123123</span>
     <div class="div1">45666</div>
 ```
-结果
+结果是这样：
+
 ![float](http://blog.bengiw.com:3000/screenshot/float4.png)
 
 查查资料发现浮动的设计初衷是为了实现文字环绕效果TnT
+
 ![float](http://upload-images.jianshu.io/upload_images/1158202-27ac63a8ae142d04.png?imageMogr2/auto-orient/strip%7CimageView2/2)
 
 但是人们很快发现了他的好处，可以设置宽高，并且一个挨着一个像内联元素一样排列。早期的浏览器是不支持`inline-block`的，于是`float`就成了大家所热爱的神器。相比`inline-block`,他真的很特别。
+
 ![float](http://upload-images.jianshu.io/upload_images/1158202-6d074de3fdb03dc1.png?imageMogr2/auto-orient/strip%7CimageView2/2)
 
 #### 浮动的特征

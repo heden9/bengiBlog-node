@@ -104,18 +104,24 @@ css的布局模型可以看做是在y轴上分布，划分为三层，我们常
 ```
 效果：
 ![float](http://blog.bengiw.com:3000/screenshot/float1.png)
+
 这个是正常的效果吧，加上刚刚注掉的两行代码后：
+
 ![float](http://blog.bengiw.com:3000/screenshot/float2.png)
 
 可以看到只有紫色的正方形的位置改变了，其他的元素都没有移动。这就证实了刚刚的说法。而且紫色把红色元素盖住了，说明紫色元素此时其实处于比文档流更高的层级。
 
 这时候你可能说，是紫色元素写在下面，导致了紫色能盖住红色。那这样你没话说了吧
+
 ![float](http://blog.bengiw.com:3000/screenshot/float5.png)
+
 >   不脱离文档流，也不影响其他元素的布局，处于层次模型层中
 
 #### 2.absolute
 张总那盗来的一张图简单描述下层级关系
+
 ![float](http://image.zhangxinxu.com/image/blog/201601/2016-01-07_235108.png)
+
 #### 关于zIndex
 张总的一篇文章[<<深入理解CSS中的层叠上下文和层叠顺序>>](http://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)中有非常用力的描述。
 
@@ -152,7 +158,9 @@ css的布局模型可以看做是在y轴上分布，划分为三层，我们常
     </div>
 ```
 效果
+
 ![float](http://blog.bengiw.com:3000/screenshot/absolute.png)
+
 ##### 2.父元素定位，且zIndex为数值时。该元素层级由父元素决定。父元素zIndex高者在上。若相同时，父元素谁在后面谁在上。
 ```css
     // 将css更改为
@@ -166,6 +174,7 @@ css的布局模型可以看做是在y轴上分布，划分为三层，我们常
     }
 ```
 效果是这样啦
+
 ![float](http://blog.bengiw.com:3000/screenshot/absolute2.png)
 
 定位元素，zIndex不为auto时，称作**创建了层叠上下文**

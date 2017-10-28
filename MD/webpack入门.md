@@ -229,4 +229,53 @@ WebPack可以看做是模块打包机：它做的事情是，分析你的项目�
         }
     }
 ```
+
+#### 10.使用打包注释
+```javascript
+    const webpack = requier('webpack');
+    ...
+    plugins: [
+        new webpack.BannerPlugin('Copyright © Bengi的博客 2017 | bengiw.com')
+    ]
+```
+
+#### 11.开发环境和生产环境
+-   devDependencies 存放测试代码依赖的包或构建工具的包
+-   dependencies 存放项目或组件代码中依赖到的
+-   安装全部项目依赖包:`npm install`
+-   安装生产环境依赖包:`npm install --production`
+
+#### 12.打包第三方依赖
+```javascript
+    entry: {
+        jquery: 'jquery',
+        vue: 'vue',
+        // 或打包到一起
+        vendor: ['vue', 'jquery']
+    },
+    ...
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['jquery','vue'], // name对应入口文件的名字
+            // name: 'vendor',
+            filename: 'assets/js/[name].js', // 把文件打包到哪里，是一个路径
+            minChunks: 2 // 最小打包的文件模块数，
+        }),
+    ]
+```
+#### 13.资源拷贝
+```javascript
+    yarn add copy-webpack-plugin --dev
+```
+可以拷贝一些项目文档之类的东西
+```javascript
+    const CopyWebpackPlugin = require('copy-webpack-plugin');
+    ...
+    plugins: [
+        new CopyWebpackPlugin([{ // 资源拷贝
+            from: __dirname + '/src/public',
+            to: './public'
+        }])
+    ]
+```
 完整代码可见[https://github.com/w771854332/webpack-demo](https://github.com/w771854332/webpack-demo)

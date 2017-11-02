@@ -197,7 +197,7 @@ css的布局模型可以看做是在y轴上分布，划分为三层，我们常
 关于**层叠上下文**
 
 更多的知识，还是看张总的文章吧。
->   [<<深入理解CSS中的层叠上下文和层叠顺序>>](http://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)
+>   [<<深入理解CSS中的层叠上下文和层叠顺序>>](http://blog.bengiw.com:3000/screenshot/float3.png)
 
 ---
 

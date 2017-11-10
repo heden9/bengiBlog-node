@@ -50,3 +50,48 @@
 
 
 来看一下setState之后的流程
+![setState](https://github.com/w771854332/bengiBlog-node/blob/master/public/screenshot/setState.png?raw=true)
+
+看上去蛮复杂的把。其实简单的来看，setState被分为两种状态：
+-   批量更新模式
+-   普通更新模式
+
+上面我们看到的例子就是处于批量更新模式，我们再来看一个例子：
+
+```javascript
+export default class App extends React.Component {
+  state = {
+    sum: 1
+  };
+  componentDidMount(){
+    setTimeout(()=>{
+      this.setState({
+        sum: '123'
+      })
+      console.log()
+      this.setState({
+        sum: '345'
+      })
+    }, 0);
+    
+  }
+  render(){
+    console.log(this.state.sum)
+    return (
+      <div>{this.state.sum}</div>
+    )
+  }
+}
+```
+
+ps：setTimeout时间设为0的意思就不提了
+你猜控制台输出的结果是啥 :)
+
+
+```javascript
+    // 1
+    // 123
+    // 456
+```
+
+好啦，这就是所谓的普通更新模式。意思也非常好理解，在同一个`执行栈`中的每个`setState`操作都会触发生命周期，更新视图。

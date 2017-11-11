@@ -109,3 +109,26 @@ dom结构中找不到
 
 
 ### v-once
+
+
+### 自定义指令
+
+指令的生命周期
+-   bind
+-   inserted
+-   update
+-   componentUpdated
+-   unbind
+
+
+
+### vue生命周期
+
+-   beforeCreate
+-   created
+-   beforeMount
+-   mounted
+-   beforeUpdate
+-   updated
+-   beforeDestroy
+-   destroyed

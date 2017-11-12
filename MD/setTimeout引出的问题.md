@@ -90,3 +90,33 @@ alert('this is an alert box');
 我们可以通过`InteractionManager`来让逻辑代码在ui线程执行之后进行，可以有效缓解切换页面时的卡顿情况。
 
 再比如
+
+![setTimeout2](https://github.com/w771854332/bengiBlog-node/blob/master/public/screenshot/setTimeout2.png?raw=true)
+
+react-router有一个总所周知的问题，他不能很好的处理锚点。
+
+假设我们有一个场景：
+    需要点击标签按钮，跳转页面并滚动到响应的锚点位置
+
+但是react-router拦截了url，使用hash并不会滚动。
+
+我们可以获取url中的hash，通过
+```javascript
+scrollToAnchor = (anchorName) => {
+    if (anchorName) {
+        // 找到锚点
+        let anchorElement = document.getElementById(anchorName);
+        // 如果对应id的锚点存在，就跳转到锚点
+        if(anchorElement) { anchorElement.scrollIntoView(); }
+    }
+}
+```
+类似的函数来实现锚点的效果。但是我们需要在`componentDidMount`中调用该函数。
+
+但是我们想要尽可能方便的使用“锚点跳转”。并且这个方法其实跟每个组件本身都没有什么关系，把“锚点跳转”内嵌到每个组件中并不符合我们的编程原则，我们叫他“侵入式的代码”，完全没有必要。他最多算是一个“插件功能”。
+
+于是我们统一管理url中的hash，并通过`setTimeout(fn,0)`来达到相同的效果。我觉得是一个更优解。
+
+### 三、不要在项目中频繁大量的使用
+
+虽然`setTimeout`有一些妙用，但是他本是确实是在`宏观任务队列中新增任务了`，所以万万不能滥用啊。

@@ -84,3 +84,9 @@ alert('this is an alert box');
 比如页面加载的时候，有些与渲染无关又特别耗时的计算，就可以通过`setTimeout`来后置，可以有效缓解页面的阻塞情况。
 
 这点在ReactNative里甚至都成了一个api
+
+![InteractionManager](https://github.com/w771854332/bengiBlog-node/blob/master/public/screenshot/InteractionManager.png?raw=true)
+
+我们可以通过`InteractionManager`来让逻辑代码在ui线程执行之后进行，可以有效缓解切换页面时的卡顿情况。
+
+再比如

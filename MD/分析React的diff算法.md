@@ -55,8 +55,15 @@ React抛弃了一些web端不常见的场景，使用了以下3个策略
 
 **假如真的发生了跨级节点移动的话**，React在扫描时发发现b层节点多了，就创建他。发现a层节点少了，就删除他。例如：
 
+![dom层级变换](https://github.com/w771854332/bengiBlog-node/blob/master/public/screenshot/dom%E5%B1%82%E7%BA%A7%E5%8F%98%E6%8D%A2.png?raw=true)
+
+此时，diff 的执行顺序为：create A → create B → create C → delete A。
+>   diff应该是先执行创建任务再执行删除的
+
+
 ##### 策略二：拥有相同类的两个组件将会生成相似的树形结构，拥有不同类的两个组件将会生成不同的树形结构。
 
 ##### 策略三：对于同一层级的一组子节点，它们可以通过唯一key进行区分。
 
 
+未完待续...

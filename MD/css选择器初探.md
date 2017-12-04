@@ -91,7 +91,10 @@
 ```css
     p:first-child {
 
-    }
+    } // p是他的父元素的第一个孩子
+    p:first-of-type{
+
+    } // 第一个出现的p
     p:last-child {
 
     }
@@ -99,6 +102,9 @@
 
     }
     a:hover {
+
+    }
+    p:nth-child(n){ // 表达式从1开始
 
     }
 ```

@@ -5,7 +5,7 @@ var fs = require('fs');
 var moment = require('moment');
 var marked = require('marked');
 /* GET home page. */
-router.post('/article', function(req, res, next) {
+router.get('/article', function(req, res, next) {
     var id = req.body.id;
     blogModel.queryArticle(id, function (rs) {
         if (!rs) {

@@ -6,7 +6,7 @@ var moment = require('moment');
 var marked = require('marked');
 /* GET home page. */
 const article = function(req, res, next) {
-    var id = req.body.id;
+    var id = req.query.id || req.body.id;
     blogModel.queryArticle(id, function (rs) {
         if (!rs) {
             res.send({

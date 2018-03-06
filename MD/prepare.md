@@ -213,6 +213,11 @@ setImmediate 结果存入链表中，宏任务 只执行一个
 
 
 
+hiapp的项目
+
+移动端兼容问题，
+ios11的fixed bug问题及滚动问题，
+解决办法。iscroll 
 在new一个对象的时候发生了什么
 
 
@@ -345,7 +350,8 @@ debounce
 throttle
 ```javascript
   var throttle = function(delay, action){
-    var last = 0return function(){
+    var last = 0
+    return function(){
       var curr = +new Date()
       if (curr - last > delay){
         action.apply(this, arguments)

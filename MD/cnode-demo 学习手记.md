@@ -53,7 +53,7 @@ webpack配置中的libraryTarget配置commonjs2的作用，可以看到生成的
   "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js"
 ```
 
-配置dev下的webpack-dev-server 设置环境变量 安装cross-env
+配置dev下的webpack-dev-server 设置环境变量 安装cross-env
 
 安装react的热更新
 ```bash

@@ -9,7 +9,7 @@
 演示地址 <http://mgq.jblog.info>
 
 
-### 前言 
+### 前言
 
 这是一个智能填写表格的系统，通过教师基础信息的采集，以及日常科研信息的录入，来扩充知识储备。在往后填表的过程中，先分析表格，再自动填充可识别内容，大幅度减少老师的工作量。项目采用前后端分离的架构。分为pc端、微信端。依托公众号进行开发。
 
@@ -35,7 +35,7 @@
 
 ### 项目截图
 
-|首页|文档页|个人页|
+|首页|文档页|个人页|
 |:--:|:--:|:--:|
 ![首页](http://blog.bengiw.com:3000/screenshot/easyWrite.png)|![文档页](http://blog.bengiw.com:3000/screenshot/easyWrite2.png)|![个人页](http://blog.bengiw.com:3000/screenshot/easyWrite3.png)
 |文档页空|

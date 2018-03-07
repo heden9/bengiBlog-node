@@ -127,7 +127,7 @@ dom结构中找不到
 -   beforeCreate
 -   created
 -   beforeMount
--   mounted
+-   mounted
 -   beforeUpdate
 -   updated
 -   beforeDestroy

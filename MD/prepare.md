@@ -1,6 +1,6 @@
 捕获和冒泡的坑
 
-1.先捕获再冒泡，是对其他元素说的。
+1.先捕获再冒泡，是对其他元素说的。
 对于同一个元素绑定的事件，是按照代码顺序来执行事件的
 
 
@@ -84,7 +84,7 @@ gulp和webpack的区别？(模块与流，CommonChunks抽出公共模块)
 
 gulp 是 task runner，Webpack 是 module bundler
 
-gulp根据指定的任务一个个跑完，可以完成node下几乎所有的任务。文件stream
+gulp根据指定的任务一个个跑完，可以完成node下几乎所有的任务。文件stream
 webpack是从一个入口进去，顺藤摸瓜，吧所有的资源打包输出
 
 
@@ -217,7 +217,7 @@ hiapp的项目
 
 移动端兼容问题，
 ios11的fixed bug问题及滚动问题，
-解决办法。iscroll 
+解决办法。iscroll
 在new一个对象的时候发生了什么
 
 

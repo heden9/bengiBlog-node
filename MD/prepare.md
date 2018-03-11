@@ -211,7 +211,7 @@ setTimeout 结果存入红黑树中，执行时，时间复杂度是O(lg(n))
 nextTick 结果放入栈中 微任务，每个tick会把数组中的回调都执行完
 setImmediate 结果存入链表中，宏任务 只执行一个
 
-
+### 华为小米某些机型html的font-size和‘最终的font-size’不相等，导致问题
 
 hiapp的项目
 

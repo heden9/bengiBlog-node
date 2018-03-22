@@ -212,7 +212,33 @@ nextTick 结果放入栈中 微任务，每个tick会把数组中的回调都执
 setImmediate 结果存入链表中，宏任务 只执行一个
 
 ### 华为小米某些机型html的font-size和‘最终的font-size’不相等，导致问题
-
+```javascript
+/*1.31 修复小米rem bug*/
+  function setRem() {
+      var e = 0;
+      document.documentElement && document.documentElement.clientWidth
+        ? e = document.documentElement.clientWidth
+        : document.body && document.body.clientWidth
+          ? e = document.body.clientWidth
+          : window.innerWidth && (e = window.innerWidth),
+      document.documentElement.style.fontSize = e > 750
+        ? "100px"
+        : e / 750 * 100 + "px";
+  }
+  function modifileRootRem () {
+    var root = window.document.documentElement;
+    var fontSize = parseFloat(root.style.fontSize);
+    var finalFontSize = parseFloat(window.getComputedStyle(root).getPropertyValue("font-size"));
+    if(finalFontSize === fontSize) return;
+    root.style.fontSize = fontSize+(fontSize-finalFontSize) + "px";
+  }
+  setRem();
+  modifileRootRem();
+  window.onresize = function () {
+    setRem();
+    modifileRootRem();
+  };
+```
 hiapp的项目
 
 移动端兼容问题，
@@ -506,4 +532,30 @@ function getCookie(cname)
 ```
 
 
+### 说到前端优化
 
+- 1.服务端渲染ssr，同构直出
+- 2.渐进启动，先展示一个框架，然后使用可以加速初始渲染时间的模块或技术（例如tree-shaking和code-splitting），因为大部分性能问题来自于应用引导程序的初始分析时间。还可以在服务器上提前编译，从而减轻部分客户端的渲染过程，从而快速输出结果。最后，考虑使用Optimize.js来加快初始加载速度，它的原理是包装优先级高的调用函数
+- 3.http缓存 强缓存
+- 4.js代码异步调用 defer和async
+- 5.通过tree-shaking和code-splitting减少净负载
+- 6.feed中图片懒加载
+- 7.选择一个合适的cdn
+- 8.使用http/2.0 多路复用、server push、头部压缩
+- 9.服务端压缩算法 Brotli或Zopfli或gzip
+
+
+### 如何防御网页劫持
+
+csp 内容安全策略（Content Security Policy）白名单机制。
+
+运营商劫持的主要手法：
+- 1.DNS 劫持。直接篡改 DNS 返回包，比例很小，除了让用户修改 DNS 没什么好办法。
+- 2.HTTP 劫持。全部或部分替换/注入页面元素，比例很大。
+[csp](http://www.ruanyifeng.com/blog/2016/09/csp.html)
+遇到返回包全量替换（整个页面或 JS 文件），请用 HTTPS。
+遇到 script、iframe 等注入，可以用 CSP 防御。
+
+
+### nodejs event loop设计初衷
+nodejs 具有事件驱动和非阻塞但线程的特点，使相关应用变得比较轻量和高效。当应用程序需要相关I/O操作时，线程并不会阻塞，而是把I/O操作移交给底层类库（如：libuv）。此时nodejs线程会去处理其他的任务，当底层库处理完相关的I/O操作后，会将主动权再次交还给nodejs线程。因此event loop的作用就是起到调度线程的作用，如当底层类库处理I/O操作后调度nodejs单线程处理后续的工作。也就是说当nodejs 程序启动的时候，它会开启一个event loop以实现异步的api调度、schedule timers 、回调process.nextTick()。

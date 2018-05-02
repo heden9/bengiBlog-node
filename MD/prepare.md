@@ -255,6 +255,14 @@ ios11的fixed bug问题及滚动问题，
 	var result = Person.call(obj,"John"); // 相当于obj.Person("John")
 	return typeof result === 'object' ? result : obj; // 如果无返回值或者返回一个非对象值，则将obj返回作为新对象
 }
+function _new(Person){
+
+  var obj = {};
+obj.__proto__ = Person.prototype; // 此时便建立了obj对象的原型链：
+// obj->Person.prototype->Object.prototype->null
+var result = Person.call(obj,"John"); // 相当于obj.Person("John")
+return typeof result === 'object' ? result : obj;
+}
 ```
 
 
@@ -358,7 +366,7 @@ export function arg(fn, number) {
 }
 ```
 
-debounce
+debounce 防抖 一般用于点击事件
 ```javascript
   var debounce = function(idle, action){
     var last
@@ -373,7 +381,7 @@ debounce
 
   var nextFunc = debounce(30, ajax)(id)
 ```
-throttle
+throttle 节流 一般用于滚动事件
 ```javascript
   var throttle = function(delay, action){
     var last = 0
@@ -446,7 +454,7 @@ slice(start, end)
     if(window.XMLHttpRequest){
         xmlhttp = new XMLHttpRequest();
     }else{
-        // code for IE6, IE5
+        // code for IE
         xmlhttp = ActiveXObject("Microsoft.XMLHTTP");
     }
 
@@ -466,6 +474,7 @@ slice(start, end)
         */
         if (xmlhttp.readyState==4 && xmlhttp.status==200){
             document.getElementById("myDiv").innerHTML=xmlhttp.responseText;//获得字符串形式的响应数据
+
         }
       }
     xmlhttp.open("Get","url",true);
@@ -543,6 +552,7 @@ function getCookie(cname)
 - 7.选择一个合适的cdn
 - 8.使用http/2.0 多路复用、server push、头部压缩
 - 9.服务端压缩算法 Brotli或Zopfli或gzip
+- 10.减少重绘重排
 
 
 ### 如何防御网页劫持
@@ -559,3 +569,66 @@ csp 内容安全策略（Content Security Policy）白名单机制。
 
 ### nodejs event loop设计初衷
 nodejs 具有事件驱动和非阻塞但线程的特点，使相关应用变得比较轻量和高效。当应用程序需要相关I/O操作时，线程并不会阻塞，而是把I/O操作移交给底层类库（如：libuv）。此时nodejs线程会去处理其他的任务，当底层库处理完相关的I/O操作后，会将主动权再次交还给nodejs线程。因此event loop的作用就是起到调度线程的作用，如当底层类库处理I/O操作后调度nodejs单线程处理后续的工作。也就是说当nodejs 程序启动的时候，它会开启一个event loop以实现异步的api调度、schedule timers 、回调process.nextTick()。
+
+### webpack打包优化
+- 1.文件多
+- 2.依赖多
+- 3.页面多
+
+
+* 方法一 分开vendor和app
+    - DllPlugin
+    - DllReferencePlugin
+* 方法二 并行压缩
+    - UglifyJsPlugin
+      - parallel
+      - cache
+* 方法三 对loader开启并行
+    - HappyPack (如果src下依赖较少，则会延长时间)
+* 方法四 babel-loader的优化
+    - options.cacheDirectory
+    - include
+    - exclude
+* 其他方法
+    - 减少resolve
+    - Devtool：去除sourceMap
+    - cache-loader
+    - node webpack升级
+
+生成稳定的hash
+  - 使用chunkHash（每个chunk自己的hash）
+  - 提取webpack runtime(可以直接inline到html)
+  - NamedChunkPlugin
+code-split做的事
+  - 为异步模块单独命名（如果用数字命名的话他会变）
+
+
+#### 多页面应用的配置
+- 多配置
+    - 优点
+      * webpack可以处理一个配置的数组
+      * parallel-webpack可以大幅提升打包速度
+      * 配置更加灵活
+    - 缺点
+      * 多页之间不能公用缓存
+- 单配置
+
+
+### 前端监控
+- 1.window.onerror 监听error事件
+```javascript
+window.onerror = function(errorMessage, scriptURI, lineNo, columnNo, error) {
+    console.log('errorMessage: ' + errorMessage); // 异常信息
+    console.log('scriptURI: ' + scriptURI); // 异常文件路径
+    console.log('lineNo: ' + lineNo); // 异常行号
+    console.log('columnNo: ' + columnNo); // 异常列号
+    console.log('error: ' + error); // 异常堆栈信息
+};
+
+console.log(a);
+```
+*  一个问题：跨域后，error事件无法正常捕获错误信息，统一返回Script Error事件。```解决方案便是script属性配置 crossorigin="anonymous" 并且服务器添加Access-Control-Allow-Origin。```
+-  代码压缩后导致错误信息无法辨认，开启source-map
+- 有些错误被框架或类库捕获，如React有componentDidCatch
+
+

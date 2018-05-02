@@ -1,6 +1,40 @@
 ## 剑指offer test
 
+二叉树的遍历
+```javascript
+  function preOrder(root){
+    if (root){
+      console.log(root.val);
+      preOrder(root.left);
+      preOrder(root.right);
+    }
+  }
+```
+非递归
+```javascript
+  function preOrder(root){
+    var stack = [];
+    stack.push(root);
+    while(stack.length ！== 0){
+      var node = stack.pop();
+      console.log(node.val);
+      node.left && stack.push(node.left);
+      node.right && stack.push(node.right);
+    }
+  }
+```
+求二叉树的深度
+```javascript
+  function TreeDepth(pRoot){
+    if (!pRoot){
+        return 0;
+    }
+    var left = 1 + TreeDepth(pRoot.left);
+    var right = 1 + TreeDepth(pRoot.right);
 
+    return Math.max(left, right);
+  }
+```
 ### 1.查找
 在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
 
@@ -201,7 +235,7 @@
 ```
 
 ### 6.链表合并
-
+按照升序合并两个链表
 ```javascript
   function Merge(pHead1, pHead2){
     // write code here
@@ -219,4 +253,129 @@
         return pHead2;
     }
   }
+```
+
+### 7.判断b树是a树的子树
+
+```javascript
+  function HasSubTree(root1, root2){
+    if (!root1 || !root2){
+      return false;
+    }
+    return isSubTree(root1, root2) || isSubTree(root1.left, root2) || isSubTree(root1.right, root2);
+  }
+
+  function isSubTree(root1, root2){
+    if (!root2){ // 若b子树为空
+      return true;
+    }
+    if (!root1){
+      return false;
+    }
+    if (root1.val == root2.val){
+      return isSubTree(root1.left, root2.left) && isSubTree(root1.right, root2.right);
+    }else {
+      return false;
+    }
+  }
+```
+
+
+### 8.反转二叉树
+
+```javascript
+  function Mirror(root){
+    if (!root){
+      return null;
+    }
+    var left = root.left;
+    root.left = Mirror(root.right);
+    root.right = Mirror(left);
+    return root;
+  }
+```
+
+### 6.判断栈的出栈序列是否合法
+
+```JavaScript
+  function IsPopOrder(pushV, popV){
+    var stack = [];
+    var di = 0;
+    for(var i = 0; i < pushV.length; i++){
+      // 开始入栈，直到栈顶元素等于出栈序列的第一个。 然后直接出栈
+      stack.push(pushV[i]);
+      while(stack.length && stack[stack.length - 1] == popV[di]){
+        stack.pop();
+        di ++;
+      }
+    }
+    return stack.length === 0;
+  }
+```
+
+### 7.二叉树的层序遍历
+利用队列
+
+```javascript
+  function PrintFromTopToBottom(root){
+      var stack = [];
+      var log = [];
+      root && stack.push(root);
+      while (stack.length !== 0){
+          var node = stack.shift();
+
+          node.left && stack.push(node.left);
+          node.right && stack.push(node.right);
+          log.push(node.val)
+      }
+      return log;
+  }
+```
+
+### 8.求两个链表的第一个公共节点
+两个链表有公共节点
+```
+  1
+   \  y
+    2 - 3 - 4
+   /    z
+  2  x
+ /
+1
+```
+可以看出来，两个指针走的步数是相同的。两个指针加起来 x + y + z 总步数刚好能相同。
+所以我们让p1走到头后，就往pHead2上走。p2走到头后往pHead1上走。他们就一定能在公共节点处回合。
+```javascript
+  function FindFirstCommonNode(pHead1, pHead2){
+    var p1 = pHead1;
+    var p2 = pHead2;
+    while(p1 !== p2){
+      p1 = p1 ? p1.next : pHead2;
+      p2 = p2 ? p2.next : pHead1;
+    }
+    return p1;
+  }
+```
+
+#### 判断链表是否有环
+两个指针从头开始，一个走两步，一个走一步。等到走两步的追上走一步的指针后。就能证明链表有环。
+```
+  1 - 1 - 1 - 2 - 3
+     x    |        \
+          8         4
+          |        /
+          7 - 6 - 5
+```
+设链表在第x个节点处产生环。环内有n个节点。在距交点 y处相遇。
+可得公式 2（X + N + Y）= X + 2N - Y
+可知 X = Y
+
+### 求1+2+3+...+n
+求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
+```javascript
+function Sum_Solution(n){
+    // write code here
+    var res = n;
+    return res && (res += Sum_Solution(n - 1)), res;
+}
 ```

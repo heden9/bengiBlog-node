@@ -3,7 +3,7 @@
 
 
 ### concatAll switch mergeAll
-
+这些属于合并运算符。
 concatAll
 
 switch

@@ -35,6 +35,7 @@ mergeAll
   }
 
 
+
   var source = Rx.Observable.interval(1000).take(3);
   var o1 = {
     next(e) {
